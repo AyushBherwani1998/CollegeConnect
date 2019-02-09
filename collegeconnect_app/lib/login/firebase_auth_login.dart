@@ -1,8 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:collegeconnect_app/firebase_services/firebase_auth.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:collegeconnect_app/login/login_page.dart';
 import 'package:collegeconnect_app/user_interface/homepage.dart';
+
+import 'package:collegeconnect_app/user_interface/userinfo_form.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FireBaseAuthClass extends StatefulWidget{
 
@@ -26,6 +32,10 @@ class FireBaseAuthPage extends State<FireBaseAuthClass>{
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
 
+  bool userInfo = false;
+  DocumentReference documentReference;
+  StreamSubscription<DocumentSnapshot> subscription;
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +46,14 @@ class FireBaseAuthPage extends State<FireBaseAuthClass>{
         }
         authStatus = user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
       });
+    });
+    documentReference = Firestore.instance.collection('users').document(_userId);
+    subscription = documentReference.snapshots().listen((snapshot) {
+      if (snapshot.exists) {
+        setState(() {
+          userInfo = snapshot.data['userInfo'];
+        });
+      }
     });
   }
 
@@ -85,7 +103,8 @@ class FireBaseAuthPage extends State<FireBaseAuthClass>{
         break;
       case AuthStatus.LOGGED_IN:
         if(_userId.length > 0 && _userId != null){
-          return Home();
+            return Home(userId: _userId,auth: widget.auth,onSignedOut: _onSignedOut,);
+
         }else return _waitingScreen();
         break;
       default:

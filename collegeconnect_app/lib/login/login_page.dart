@@ -680,7 +680,9 @@ class _LoginPageState extends State<LoginPage>
 
         if (userId.length > 0 && userId != null) {
           print("True");
-
+          var dataMap = new Map<String, dynamic>();
+          dataMap['userInfo'] = false;
+          Firestore.instance.collection("users").document(userId).setData(dataMap);
           widget.onSignedIn();
         }
       } else {

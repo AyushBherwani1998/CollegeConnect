@@ -24,6 +24,7 @@ dependencies:
   cloud_firestore: ^0.8.2
   font_awesome_flutter: ^8.0.1
   progress_indicators: ^0.1.2
+  datetime_picker_formfield: ^0.1.8
 
 dev_dependencies:
   flutter_test:
