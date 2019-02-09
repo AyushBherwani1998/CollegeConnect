@@ -12,24 +12,27 @@ import {FormsModule} from "@angular/forms";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { SecurityComponent } from './users/security/security.component';
+import {authGuard} from "./shared/guards/auth-guard.service";
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    SecurityComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(environment.firebase, 'my-app-name'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule
   ],
-  providers: [],
+  providers: [authGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
