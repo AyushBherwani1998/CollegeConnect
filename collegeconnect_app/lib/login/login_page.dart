@@ -680,7 +680,7 @@ class _LoginPageState extends State<LoginPage>
 
         if (userId.length > 0 && userId != null) {
           print("True");
-          
+
           widget.onSignedIn();
         }
       } else {
