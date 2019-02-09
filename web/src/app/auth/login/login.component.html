@@ -1,0 +1,17 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+      <div class="col-xl-12 col-md-12 col-sm-12">
+          <div class="form-field">
+              <label for="email">E-mail:</label>
+              <input type="email" name="email" ngModel class="form-control"/>
+          </div>
+          <div class="form-field">
+              <label for="email">Password:</label>
+              <input type="password" name="password" id="password" ngModel class="form-control"/>
+          </div>
+          <div class="form-field">
+            <input type="submit" class="btn btn-success" value="submit"/>
+          </div>
+        </div>
+  </form>
+</div>
