@@ -6,12 +6,10 @@ import './bubble_indication_painter.dart';
 import 'package:collegeconnect_app/firebase_services/firebase_auth.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'forgot_password.dart';
-import 'dart:io';
-import 'package:collegeconnect_app/user_interface/home_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class LoginPage extends StatefulWidget {
-
   LoginPage({
     this.auth,
     this.onSignedIn,
@@ -42,7 +40,7 @@ class _LoginPageState extends State<LoginPage>
   TextEditingController signupEmailController = new TextEditingController();
   TextEditingController signupPasswordController = new TextEditingController();
   TextEditingController signupPasswordVerifyController =
-  new TextEditingController();
+      new TextEditingController();
 
   bool _obscureTextLogin = true;
   bool _obscureTextPassword = true;
@@ -522,7 +520,7 @@ class _LoginPageState extends State<LoginPage>
                               size: 22.0,
                               color: Colors.black,
                             ),
-                            hintText: "Verify Password",
+                            hintText: "ReEnter Password",
                             hintStyle: TextStyle(
                                 fontFamily: "WorkSansSemiBold", fontSize: 17.0),
                             suffixIcon: GestureDetector(
@@ -628,42 +626,24 @@ class _LoginPageState extends State<LoginPage>
     });
 
     try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        print('connected');
-        try {
-          String userId = "";
-          userId = await widget.auth.signIn(loginEmailController.text.toString(),
-              loginPasswordController.text.toString());
-          print("Signed in: $userId");
-          setState(() {
-            _isLoading = false;
-          });
-
-          if (userId.length > 0 && userId != null) {
-            widget.onSignedIn();
-          }
-        } catch (e) {
-          print("Error : $e");
-          setState(() {
-            _isLoading = false;
-            _errorMessage = e.message;
-            showInSnackBar(_errorMessage);
-          });
-        }
-      }
-    } on SocketException catch (_) {
-      print('not connected');
-      var noteDataBase = UserDataBase();
-      String userId = await noteDataBase.getUser(loginEmailController.text.toString(), loginPasswordController.text.toString());
-      print(userId);
+      String userId = "";
+      userId = await widget.auth.signIn(loginEmailController.text.toString(),
+          loginPasswordController.text.toString());
+      print("Signed in: $userId");
       setState(() {
         _isLoading = false;
       });
+
       if (userId.length > 0 && userId != null) {
-        print("True");
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(userId: userId,auth: new Auth())));
+        widget.onSignedIn();
       }
+    } catch (e) {
+      print("Error : $e");
+      setState(() {
+        _isLoading = false;
+        _errorMessage = e.message;
+        showInSnackBar(_errorMessage);
+      });
     }
   }
 
@@ -697,13 +677,10 @@ class _LoginPageState extends State<LoginPage>
         userId = await widget.auth.signUp(signupEmailController.text.toString(),
             signupPasswordController.text.toString());
         print("Signed up: $userId");
-        saveUser(userId, signupEmailController.text.toString(),
-            signupPasswordController.text.toString());
-        setState(() {
-          _isLoading = false;
-        });
+
         if (userId.length > 0 && userId != null) {
           print("True");
+
           widget.onSignedIn();
         }
       } else {
@@ -721,12 +698,5 @@ class _LoginPageState extends State<LoginPage>
         showInSnackBar(_errorMessage);
       });
     }
-  }
-
-  void saveUser(String uid, String email, String password) async {
-    var user = User(uid: uid, email: email, password: password);
-    var noteDataBase = UserDataBase();
-    noteDataBase.saveUser(user);
-    print("Note Saved");
   }
 }
