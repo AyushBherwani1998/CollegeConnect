@@ -1,15 +1,12 @@
-import 'package:collegeconnect_app/firebase_services/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:collegeconnect_app/user_interface/homepage.dart';
+
 
 class MyForm extends StatelessWidget{
   final String userId;
-  final VoidCallback onSignedOut;
-  final FireBaseAuth auth;
-  MyForm({this.userId,this.auth,this.onSignedOut});
+  MyForm({this.userId});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -19,7 +16,7 @@ class MyForm extends StatelessWidget{
         title: Text("About Me",style: TextStyle(color: Colors.black),),
         centerTitle: true,
       ),
-      body: MyFormPage(userId: userId,auth: auth,onSignedOut: onSignedOut,)
+      body: MyFormPage(userId: userId)
     );
 
   }
@@ -27,20 +24,15 @@ class MyForm extends StatelessWidget{
 
 class MyFormPage extends StatefulWidget{
   final String userId;
-  final VoidCallback onSignedOut;
-  final FireBaseAuth auth;
-  MyFormPage({this.userId,this.auth,this.onSignedOut});
+  MyFormPage({this.userId});
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return MyPage(userId: userId,auth: auth,onSignedOut: onSignedOut);
+    return MyPage(userId: userId);
   }
 }
 
 class MyPage extends State<MyFormPage>{
-
-  final VoidCallback onSignedOut;
-  final FireBaseAuth auth;
 
   TextEditingController nameController = new TextEditingController();
   TextEditingController mobileController = new TextEditingController();
@@ -56,12 +48,12 @@ class MyPage extends State<MyFormPage>{
     InputType.date: DateFormat('yyyy-MM-dd'),
   };
 
-  MyPage({this.userId,this.auth,this.onSignedOut});
+  MyPage({this.userId});
   InputType inputType = InputType.date;
 
   void _submit({String name,int mobile}){
        Firestore.instance.collection('users').document(userId).setData({"name":name,"mobile":mobile,"date":date,"department":department,"profession":profession,"userInfo":true});
-       Navigator.push(context, MaterialPageRoute(builder: (context)=>Home(userId: userId,auth: auth,onSignedOut: onSignedOut,)));
+       Navigator.pop(context);
   }
 
   @override
@@ -213,7 +205,7 @@ class MyPage extends State<MyFormPage>{
             color: Colors.blue,
             child: Container(
             padding:EdgeInsets.all(12.0),
-            child:Text("Submit",style: TextStyle(color:Colors.white),)
+            child:Text("Save",style: TextStyle(color:Colors.white),)
             ),
             )
           ),

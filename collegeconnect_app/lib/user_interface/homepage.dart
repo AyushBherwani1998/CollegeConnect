@@ -2,6 +2,9 @@ import 'package:collegeconnect_app/firebase_services/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
+import 'package:collegeconnect_app/user_interface/profile.dart';
+import 'package:collegeconnect_app/user_interface/food.dart';
+import 'package:collegeconnect_app/user_interface/lost_items.dart';
 
 class Home extends StatelessWidget{
   final String userId;
@@ -44,7 +47,7 @@ class Home extends StatelessWidget{
               ListTile(
                 title: Text('Profile'),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile(userId: userId)));
                 },
               ),
               ListTile(
@@ -64,13 +67,13 @@ class Home extends StatelessWidget{
               Container(
                 color: Colors.black,
                 width: MediaQuery.of(context).size.width,
-                height: 250.0,
+                height: 200.0,
                 child: _wave(),
               ),
               SizedBox(height: 8.0,),
               Container(
                 color: Colors.white,
-                height: 603.0 - 260.0,
+                height: 600 - 260.0,
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.all(8.0),
                 child: ListView(
@@ -89,11 +92,14 @@ class Home extends StatelessWidget{
                                 ),
                                 height: 150.0,
                                 child: GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>LostItems()));
+                                  },
                                   child: Card(
                                     color: Color(0xFF5433FF),
                                     elevation: 8.0,
                                     child: Center(
-                                      child: Text("Lost & Found",style: TextStyle(color: Colors.white,fontSize: 20.0,fontWeight: FontWeight.bold),),
+                                      child: Text("Lost Items",style: TextStyle(color: Colors.white,fontSize: 20.0,fontWeight: FontWeight.bold),),
                                     ),
                                   ),
                                 )
@@ -111,6 +117,9 @@ class Home extends StatelessWidget{
                                   height: 150.0,
                                   width: MediaQuery.of(context).size.width/2,
                                   child: GestureDetector(
+                                    onTap: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Food()));
+                                    },
                                     child: Card(
                                       color: Color(0xFF5433FF),
                                       elevation: 8.0,
