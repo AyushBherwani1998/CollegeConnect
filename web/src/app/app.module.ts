@@ -14,6 +14,10 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SecurityComponent } from './users/security/security.component';
 import {authGuard} from "./shared/guards/auth-guard.service";
+import { MaintanceComponent } from './users/security/maintance/maintance.component';
+import { SecurityHomeComponent } from './users/security/security-home/security-home.component';
+import { HomeComponent } from './home/home.component';
+import { AuthorityComponent } from './users/authority/authority.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +25,10 @@ import {authGuard} from "./shared/guards/auth-guard.service";
     SignupComponent,
     LoginComponent,
     SecurityComponent,
+    MaintanceComponent,
+    SecurityHomeComponent,
+    HomeComponent,
+    AuthorityComponent,
   ],
   imports: [
     BrowserModule,

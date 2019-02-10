@@ -1,0 +1,15 @@
+<h3 class="text-center">Lost And Found</h3>
+<div class="container">
+    <div class="row" *ngFor="let doc of lostFoundLists; index as i" style="box-shadow:4px 4px 4px lightgrey;padding:20px;margin-top:10px;">
+        <div class="col-xl-6 col-md-6 col-sm-6">
+            <img src="http://gerrishpolice.org/wp-content/uploads/2016/07/lostandfound.png" style="width:300px;box-shadow:0px 0px 0px"/>
+          </div>
+      <div class="col-xs-6 col-xl-6 col-md-6 col-sm-6" >
+          <p style="font-size:30px">Lost Item: {{doc.lost_item}}</p>
+            <p>Date: {{ doc.date }}</p>
+          <p>Description : {{ doc.description }}</p>
+          <p>Place: {{ doc.place }}</p>
+          <button class="btn btn-danger" (click)="deleteItem(doc.id)">delete</button>
+      </div>
+    </div>
+  </div>

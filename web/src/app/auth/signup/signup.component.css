@@ -1,0 +1,16 @@
+.container {
+box-shadow:-1px 3px 4px lightgrey;
+padding:30px;
+margin-top:40px;
+border:1px solid lightgrey;
+}
+.form-field {
+margin:10px 0px;
+}
+h3 {
+ border-bottom:1px solid lightgrey;
+ padding:13px;
+}
+input[type="submit"] {
+ margin-top:7px;
+}

@@ -24,9 +24,10 @@ export class AuthService {
            console.log('Success!', value);
      
             this.firebaseAuth.user.subscribe((val) => {
-              this.userService.addItem(val.uid,identity);
-           
-                
+              if(val){
+                this.userService.addItem(val.uid,identity);
+              }
+              
            })
          })
          .catch(err => {
@@ -39,22 +40,22 @@ export class AuthService {
          .auth
          .signInWithEmailAndPassword(email, password)
          .then(value => {
-           this.firebaseAuth.user.subscribe((val) => {
-           
-            firebase.auth().currentUser.getIdToken().then((tk)=>{
-              this.token = tk
-              this.router.navigate(["security"]);
-            });
-            
-             this.uid = val.uid;
-             this.userService.getItem(this.uid).then((val) => {
-                  val.docs.filter((doc) => {
-                    if(doc.id === this.uid){
-                      this.identity = doc.data().identity;
-                      console.log(this.uid,this.identity);
-                    }
-                  })
-             })
+           this.firebaseAuth.user.subscribe((uid) => {
+            if(uid){
+              this.uid = uid.uid;
+              this.userService.getItem(this.uid).then((val) => {
+                   val.docs.filter((doc) => {
+                     if(doc.id === this.uid){
+                       this.identity = doc.data().identity;
+                       firebase.auth().currentUser.getIdToken().then((tk)=>{
+                         this.token = tk;
+                         let val = this.identity;
+                         this.router.navigate([val]);
+                       });
+                     }
+                   })
+              })
+            }
            })
          })
          .catch(err => {
@@ -67,10 +68,15 @@ export class AuthService {
          .auth
          .signOut();
         this.token = undefined;
+        this.router.navigate([""]);
      }
 
      isAuthenticated(){
       return this.token !== undefined;
+     }
+
+     getIdentity(){
+       return this.identity;
      }
   
  }

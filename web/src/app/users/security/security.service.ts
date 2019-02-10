@@ -9,7 +9,7 @@ export class SecurityService {
   constructor(private afs:AngularFirestore) { }
 
   getLostFound(){
-    return this.afs.collection("lostfound").get().toPromise();
+    return this.afs.collection("lostitems").get().toPromise();
   }
   
 

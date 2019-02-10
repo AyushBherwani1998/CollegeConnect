@@ -1,4 +1,5 @@
 <div class="container">
+  <h3>Sign Up</h3>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
       <div class="col-xl-12 col-md-12 col-sm-12">
           <div class="form-field">
@@ -11,7 +12,10 @@
           </div>
           <div class="form-field">
             <label for="identity">Who are you:</label>
-            <input type="text" name="identity" id="identity" ngModel class="form-control"/>
+            <select ngModel name="identity" id="identity" class="form-control">
+                <option name="security">security</option>
+                <option name="authority">authority</option>
+              </select>
         </div>
           <div class="form-field">
             <input type="submit" class="btn btn-success" value="submit"/>

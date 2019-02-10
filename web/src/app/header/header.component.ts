@@ -11,11 +11,12 @@ export class HeaderComponent implements OnInit {
   constructor(private router:Router,private authService:AuthService) { }
 
   ngOnInit() {
+    
   }
 
   navigated(){
     this.authService.logout();
-    this.router.navigate(["signup"])
+    
   }
 
 }

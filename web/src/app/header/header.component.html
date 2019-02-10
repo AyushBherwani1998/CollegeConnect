@@ -6,13 +6,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href="#">College Connect</a>
+      <a class="navbar-brand" routerLink="/">College Connect</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="signup">Sign Up</a></li>
-        <li><a routerLink="login">Login</a></li>
-        <li><a (click)="navigated()">Logout</a></li>
+        
+          <ng-template [ngIf]="!authService.isAuthenticated()">
+            <li><a routerLink="signup">Sign Up</a></li>
+            <li><a routerLink="login">Login</a></li>
+        </ng-template>
+        <ng-template [ngIf]="authService.getIdentity()!=='authority' && authService.isAuthenticated()">
+            <li><a routerLink="security">Lost and Found</a></li>
+            <li><a routerLink="maintance">Maintance</a></li>
+        </ng-template>
+        <ng-template [ngIf]="authService.isAuthenticated()">
+            <li><a (click)="navigated()">Logout</a></li>
+          </ng-template>
       </ul>
     </div>
   </div>
