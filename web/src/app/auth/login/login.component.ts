@@ -7,7 +7,7 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  public errorMsg:string = "";
   constructor(private authService:AuthService) { }
 
   ngOnInit() {
@@ -16,7 +16,11 @@ export class LoginComponent implements OnInit {
   onSubmit(form:NgForm){
     let email = form.value.email;
     let password = form.value.password;
-    this.authService.signin(email,password);
+    this.authService.signin(email,password).catch(err => {
+     
+        this.errorMsg = err.message;
+      
+    });
   }
 
 }

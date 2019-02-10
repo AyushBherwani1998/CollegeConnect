@@ -14,3 +14,17 @@ padding:13px;
 input[type="submit"] {
 margin-top:7px;
 }
+input {
+  width:400px;
+}
+label {
+width:400px;
+margin:0px auto;
+}
+form {
+width:450px;
+margin:0px auto;
+}
+h3{
+text-align:center;
+}

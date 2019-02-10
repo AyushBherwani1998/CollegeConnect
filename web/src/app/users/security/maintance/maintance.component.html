@@ -1,3 +1,12 @@
-<p>
-  maintance works!
-</p>
+<div class="container">
+  <div class="panel panel-default" *ngFor="let doc of maintanceLists; index as i">
+    <div class="panel-body">
+        <p style="font-size:30px">Block: {{doc.block}}</p>
+        <p>Building {{ doc.building }}</p>
+      <p>Room No : {{ doc.roomNO }}</p>
+    </div>
+    <div class="panel-footer">
+      <button class="btn btn-danger" (click)="deleteIt(doc.id)">Delete</button>
+    </div>
+  </div>
+</div>

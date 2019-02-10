@@ -17,7 +17,7 @@ export class AuthService {
      }
    
      signup(email: string, password: string,identity:string) {
-       this.firebaseAuth
+      return this.firebaseAuth
          .auth
          .createUserWithEmailAndPassword(email, password)
          .then(value => {
@@ -30,13 +30,11 @@ export class AuthService {
               
            })
          })
-         .catch(err => {
-           console.log('Something went wrong:',err.message);
-         });    
+          
      }
    
      signin(email: string, password: string) {
-       this.firebaseAuth
+      return this.firebaseAuth
          .auth
          .signInWithEmailAndPassword(email, password)
          .then(value => {
@@ -58,9 +56,7 @@ export class AuthService {
             }
            })
          })
-         .catch(err => {
-           console.log('Something went wrong:',err.message);
-         });
+         
      }
    
      logout() {
