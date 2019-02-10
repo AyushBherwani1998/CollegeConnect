@@ -5,7 +5,7 @@ import 'package:wave/wave.dart';
 import 'package:collegeconnect_app/user_interface/profile.dart';
 import 'package:collegeconnect_app/user_interface/food.dart';
 import 'package:collegeconnect_app/user_interface/lost_items.dart';
-
+import 'package:collegeconnect_app/user_interface/cleaniness.dart';
 class Home extends StatelessWidget{
   final String userId;
   final VoidCallback onSignedOut;
@@ -38,10 +38,10 @@ class Home extends StatelessWidget{
             children: <Widget>[
               DrawerHeader(
                 child: Center(
-                  child: Text("College Connect"),
+                  child: Text("College Connect",style: TextStyle(color: Colors.white,fontSize: 24.0),),
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white70,
+                  color: Color(0xFF5433FF),
                 ),
               ),
               ListTile(
@@ -60,6 +60,7 @@ class Home extends StatelessWidget{
           ),
         ),
         body: Container(
+          color: Colors.white,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -99,7 +100,7 @@ class Home extends StatelessWidget{
                                     color: Color(0xFF5433FF),
                                     elevation: 8.0,
                                     child: Center(
-                                      child: Text("Lost Items",style: TextStyle(color: Colors.white,fontSize: 20.0,fontWeight: FontWeight.bold),),
+                                      child: Text("LOST ITEMS",style: TextStyle(color: Colors.white,fontSize: 20.0,fontWeight: FontWeight.bold),),
                                     ),
                                   ),
                                 )
@@ -143,6 +144,9 @@ class Home extends StatelessWidget{
                                   ),
                                   height: 150.0,
                                   child: GestureDetector(
+                                    onTap: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Cleaniness()));
+                                    },
                                     child: Card(
                                       color: Color(0xFF5433FF),
                                       elevation: 8.0,

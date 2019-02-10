@@ -1,6 +1,7 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class RLostItem extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -31,14 +32,21 @@ class MyRLostItemForm extends State<RLostItemForm>{
   TextEditingController nameController = new TextEditingController();
   TextEditingController mobileController = new TextEditingController();
   TextEditingController itemController = new TextEditingController();
-  TextEditingController place = new TextEditingController();
+  TextEditingController placeController = new TextEditingController();
   TextEditingController descController = new TextEditingController();
-  DateTime date;
+
+  DateTime date = null;
+
   final formats = {
     InputType.date: DateFormat('yyyy-MM-dd'),
   };
   InputType inputType = InputType.date;
 
+  void _submit({String name,String place,String desc,String lostItem,String mobile}){
+    print(date);
+    Firestore.instance.collection('lostitems').document().setData({"name":name,"place":place,"desc":desc,"lostItem":lostItem,"mobile":mobile,"date":date.toString().substring(0,11)});
+    Navigator.pop(context);
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -87,7 +95,6 @@ class MyRLostItemForm extends State<RLostItemForm>{
             height: 16.0,
           ),
           TextField(
-            keyboardType: TextInputType.numberWithOptions(),
             controller: itemController,
             decoration: InputDecoration(
               enabledBorder: const OutlineInputBorder(
@@ -98,6 +105,22 @@ class MyRLostItemForm extends State<RLostItemForm>{
               ),
               border: OutlineInputBorder(),
               labelText: "Lost Item",
+            ),
+          ),
+          SizedBox(
+            height: 16.0,
+          ),
+          TextField(
+            controller: placeController,
+            decoration: InputDecoration(
+              enabledBorder: const OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.black87, width: 0.0),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.black87, width: 0.0),
+              ),
+              border: OutlineInputBorder(),
+              labelText: "Place",
             ),
           ),
           SizedBox(
@@ -114,15 +137,59 @@ class MyRLostItemForm extends State<RLostItemForm>{
               inputType: inputType,
               format: formats[inputType],
               decoration: InputDecoration(
-                  labelText: 'Date Of Birth', hasFloatingPlaceholder: false),
+                  labelText: 'Date', hasFloatingPlaceholder: false),
               onChanged: (dt) => setState(() => date = dt),
             ),
           ),
           SizedBox(
             height: 16.0,
           ),
+          TextField(
+            maxLines: 3,
+            controller: descController,
+            decoration: InputDecoration(
+              enabledBorder: const OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.black87, width: 0.0),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.black87, width: 0.0),
+              ),
+              border: OutlineInputBorder(),
+              labelText: "Item Description",
+            ),
+          ),
+          SizedBox(
+            height: 16.0,
+          ),
+          Container(
+              margin: EdgeInsets.fromLTRB(50, 0.0, 50, 0.0),
+              child: MaterialButton(
+                onPressed: submit,
+                color: Colors.blue,
+                child: Container(
+                    padding:EdgeInsets.all(12.0),
+                    child:Text("Report",style: TextStyle(color:Colors.white),)
+                ),
+              )
+          ),
         ],
       ),
     );
+  }
+
+
+  void submit() {
+    if(nameController.text.toString()== "" || mobileController.text.toString()=="" || date == null
+        || itemController.text.toString()== "" || placeController.text.toString()=="" || descController.text.toString()==""){
+      Scaffold.of(context).showSnackBar( SnackBar(content: Text("Fill all the fields! Some Field are empty")));
+    }else{
+      _submit(
+        name: nameController.text.toString(),
+        mobile: mobileController.text.toString(),
+        lostItem: itemController.text.toString(),
+        desc: descController.text.toString(),
+        place: placeController.text.toString()
+      );
+    }
   }
 }

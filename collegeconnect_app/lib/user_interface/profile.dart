@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:intl/intl.dart';
 import 'package:collegeconnect_app/user_interface/userinfo_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -96,12 +94,12 @@ class MyProfilePage extends State<ProfilePage>{
         children: <Widget>[
          Container(
            height: 120.0,
-           width: 50.0,
+           width: 120.0,
              child:Padding(padding: EdgeInsets.fromLTRB(140.0,0,140.0,0),
 
              child:ClipOval(
 
-               child: Image.asset('images/ayush.jpg',height: 50.0,width: 50.0,fit: BoxFit.fill,),
+               child: Image.asset('images/ayush.jpg',height: 50.0,width: 90.0,fit: BoxFit.fill,),
 
              )
     )
