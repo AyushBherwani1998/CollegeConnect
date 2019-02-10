@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:intl/intl.dart';
 import 'package:collegeconnect_app/user_interface/userinfo_form.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

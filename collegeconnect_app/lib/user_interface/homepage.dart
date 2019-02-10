@@ -5,7 +5,7 @@ import 'package:wave/wave.dart';
 import 'package:collegeconnect_app/user_interface/profile.dart';
 import 'package:collegeconnect_app/user_interface/food.dart';
 import 'package:collegeconnect_app/user_interface/lost_items.dart';
-
+import 'package:collegeconnect_app/user_interface/cleaniness.dart';
 class Home extends StatelessWidget{
   final String userId;
   final VoidCallback onSignedOut;
@@ -144,6 +144,9 @@ class Home extends StatelessWidget{
                                   ),
                                   height: 150.0,
                                   child: GestureDetector(
+                                    onTap: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Cleaniness()));
+                                    },
                                     child: Card(
                                       color: Color(0xFF5433FF),
                                       elevation: 8.0,
