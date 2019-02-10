@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "409455964317",
+    "firebase_url": "https://collegeconnect2019.firebaseio.com",
+    "project_id": "collegeconnect2019",
+    "storage_bucket": "collegeconnect2019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409455964317:android:e24472a6d0a85c63",
+        "android_client_info": {
+          "package_name": "com.example.collegeconnectapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409455964317-rnjs7d2cf7f6j78phcnqjjlefv1mcv29.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.collegeconnectapp",
+            "certificate_hash": "7d00cf39e350157c40678fbde1e5efac27385e57"
+          }
+        },
+        {
+          "client_id": "409455964317-38g7bkf7ca9tll3bb12c90lh7urvb8ik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDghi_S4H_x0QXkrApuHKxzD0-mylPtYrw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409455964317-38g7bkf7ca9tll3bb12c90lh7urvb8ik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
